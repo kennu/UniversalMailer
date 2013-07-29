@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 81087703179C0E0D00E4DBA9 /* Build configuration list for PBXAggregateTarget "Installer" */;
 			buildPhases = (
-				81087706179C0E1A00E4DBA9 /* ShellScript */,
+				81087706179C0E1A00E4DBA9 /* Installer package generation */,
 			);
 			dependencies = (
 				81087705179C0E1500E4DBA9 /* PBXTargetDependency */,
@@ -521,18 +521,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		81087706179C0E1A00E4DBA9 /* ShellScript */ = {
+		81087706179C0E1A00E4DBA9 /* Installer package generation */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Installer package generation";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "pkgbuild \\\n --root \"$BUILT_PRODUCTS_DIR/UniversalMailer.mailbundle/\"\\\n --scripts \"$SRCROOT/installation_scripts/\"\\\n --identifier it.noware.universalmailer\\\n --install-location \"/tmp/UM-installation-tmp/UniversalMailer.mailbundle\"\\\n \"$BUILT_PRODUCTS_DIR/UniversalMailer.pkg\"\nopen \"$BUILT_PRODUCTS_DIR\"";
+			shellScript = "if [[ $CONFIGURATION != \"Debug\" ]]; then\n pkgbuild --root \"$BUILT_PRODUCTS_DIR/UniversalMailer.mailbundle/\" --scripts \"$SRCROOT/installation_scripts/\" --identifier it.noware.universalmailer.pkg --install-location \"/tmp/UM-installation-tmp/UniversalMailer.mailbundle\" \"$BUILT_PRODUCTS_DIR/UniversalMailer.pkg\"\n open \"$BUILT_PRODUCTS_DIR\"\nelse\n echo \"warning: installer not generated with Debug configuration\"\nfi";
 		};
 		81F2C47713E922FC00E61F50 /* Bundle packaging */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -747,6 +748,7 @@
 				81087702179C0E0D00E4DBA9 /* Full Version Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Full Version Release";
 		};
 		81F2C43213E867CE00E61F50 /* Build configuration list for PBXProject "UniversalMailer" */ = {
 			isa = XCConfigurationList;
